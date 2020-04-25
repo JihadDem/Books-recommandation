@@ -1,4 +1,5 @@
 import flask
+import json
 from api import BookSimilarity
 
 app = flask.Flask(__name__)
@@ -24,6 +25,7 @@ def recommend():
 	searchText = flask.request.args.get('jsdata')
 
 	output = []
+	output = ''
 	if searchText:
 		print(f'Search text: {searchText}')
 		results = booksim.recommend(searchText)
@@ -33,6 +35,7 @@ def recommend():
 
 	# TODO: Convert a fuller version to JSON rather than just an array (title, url, etc.) and render as a table instead.
 	# https://stackoverflow.com/questions/48050769/pandas-dataframe-to-flask-template-as-a-json
+	print(output)
 	return flask.render_template('results.html', recommendations=output) 
 
 def autocomplete():
